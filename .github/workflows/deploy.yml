@@ -20,9 +20,9 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install packages
-        run: npm ci
+        run: yarn install --frozen-lockfile
       - name: Build project
-        run: npm run build
+        run: yarn build
       - name: Add .nojekyll file
         run: touch ./out/.nojekyll
       - name: Deploy
