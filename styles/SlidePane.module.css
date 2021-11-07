@@ -1,0 +1,28 @@
+.slidePane {
+  position: fixed;
+  width: 100vw;
+  max-width: 650px;
+  height: calc(100vh - 7rem);
+  padding: .4rem;
+  background-color: #fff;
+  transition: top .26s ease, left .26s ease, bottom .26s ease;
+  overflow-y: auto;
+}
+.posTop { top: -100vh; left: 0; }
+.posTopActive { top: -100vh; }
+
+.posLeft { left: -100vw; top: 4rem; }
+.posLeftActive { left: 0; }
+
+.posBottom { bottom: -100vh; left: 0; }
+.posBottomActive { bottom: 3rem; }
+
+@media (min-width: 650px) {
+  .slidePane {
+    max-width: 360px;
+  }
+}
+
+.layer1 { z-index: 210; }
+.layer2 { z-index: 220; }
+.layer3 { z-index: 230; }
