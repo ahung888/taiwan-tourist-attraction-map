@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 import Image from './Image'
 import {GiBabyFace} from 'react-icons/gi'
 import styles from '../styles/Nav.module.css'
@@ -19,6 +20,8 @@ const Nav = ({ show, onNavClose }) => {
             <Image src="/images/PTX_logo.png" alt="資料介接「交通部PTX平臺」" />
           </a>
         </main>
+
+        <Link href="/intro">地圖簡介</Link>
 
         <footer>
           <div>ver: {process.env.APP_VERSION}</div>
