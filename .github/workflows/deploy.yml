@@ -34,7 +34,7 @@ jobs:
       - run: yarn install --frozen-lockfile
       - run: yarn build
         env:
-          REACT_APP_MAP_API: ${{ secrets.REACT_APP_APIKey }}
+          MAP_TOKEN: ${{ secrets.MAP_TOKEN }}
           PTX_API_ID: ${{ secrets.PTX_API_ID }}
           PTX_API_KEY: ${{ secrets.PTX_API_KEY }}
 
