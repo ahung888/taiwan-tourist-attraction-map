@@ -90,7 +90,7 @@ const IntroPage = () => {
       </main>
 
       <footer>
-        作者：<a href="https://github.com/ahung888" target="_blank">ahung888</a>
+        作者：<a href="https://github.com/ahung888" target="_blank" rel="noopener noreferrer">ahung888</a>
       </footer>
     </div>
   )
