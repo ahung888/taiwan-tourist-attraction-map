@@ -3,7 +3,7 @@ import { wrapper } from '../store';
 import Layout from '../components/Layout'
 
 import '../styles/globals.css'
-import '../styles/Home.css'
+import '../styles/home.css'
 
 function MyApp({ Component, pageProps }) {
   return (
