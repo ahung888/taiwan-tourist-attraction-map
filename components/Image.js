@@ -1,9 +1,12 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 
-const Image = ({ src, alt = '' }) => {
+const Image = (props) => {
   const router = useRouter()
-  return <img src={`${router.basePath}${src}`} alt={alt} />
+  return <img
+    {...props}
+    src={`${router.basePath}${props?.src}`}
+  />
 }
 
 export default Image
