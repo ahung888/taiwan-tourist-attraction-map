@@ -1,0 +1,154 @@
+/* layout */
+.w {
+  padding-top: 4rem;
+}
+.w .nav,
+.w .wrapper,
+.w .cta,
+.w footer {
+  width: 100%;
+}
+@media screen and (min-width: 1080px) {
+  .w .nav,
+  .w .wrapper,
+  .w .cta,
+  .w footer {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+@media screen and (min-width: 420px) and (max-width: 1079px) {
+  .w .nav,
+  .w .wrapper,
+  .w .cta,
+  .w footer {
+    width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+@media screen and (max-width: 419px) {
+  .w .nav,
+  .w .wrapper,
+  .w .cta,
+  .w footer {
+    width: 100%;
+    padding-left: .3rem;
+    padding-right: .3rem;
+  }
+  .w .nav div {
+    font-size: 1.2rem;
+  }
+}
+
+.w .wrapper {
+  display: flex;
+}
+@media screen and (max-width: 700px) {
+  .w .wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .w h1, .w h3, .w p {
+    margin-bottom: 2rem;
+  }
+}
+.w .node {
+  flex-basis: calc(50vw - 2rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.w .node p {
+  margin: 0 1rem;
+}
+
+.w .cta,
+.w footer {
+  display: flex;
+  justify-content: center;
+}
+.w main > section {
+  padding: 10rem 0;
+}
+.w main > section:nth-child(even) {
+  background-color: #FAFAFA;
+}
+
+.reverse {
+  flex-direction: row-reverse;
+}
+
+.w main section.cta {
+  display: flex;
+  justify-content: center;
+}
+
+/* nav */
+.w nav {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  background-color: #fff;
+  box-shadow: 0 1px 2px 1px rgba(0,0,0,.15);
+  z-index: 1000;
+}
+.w .nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  line-height: 1.8rem;
+  font-size: 1.5rem;
+  padding-top: .4rem;
+  padding-bottom: .4rem;
+}
+
+/* footer */
+.w footer {
+  line-height: 1.8rem;
+  font-size: 1.2rem;
+  padding: 3rem;
+}
+
+/* components */
+
+.w nav .btnCta {
+  border: 1px solid #42b883;
+  border-radius: .5rem;
+  padding: .5rem;
+  cursor: pointer;
+  color: #208b5b;
+}
+.w nav .btnCta:hover {
+  background-color: rgba(66, 184, 131, .15);
+  color: #186e48;
+}
+
+.w main .btnCta {
+  border: 1px solid #42b883;
+  border-radius: .5rem;
+  padding: .5rem;
+  cursor: pointer;
+  color: #208b5b;
+  font-size: 2rem;
+  width: 17rem;
+  padding: 2rem;
+  text-align: center;
+}
+.w main .btnCta:hover {
+  background-color: rgba(66, 184, 131, .15);
+  color: #186e48;
+}
+
+.w img {
+  max-width: 600px;
+  width: 100%;
+}
+
+@media screen and (min-width: 1080px) {}
+@media screen and (min-width: 420px) and (max-width: 768px) {}
+@media screen and (max-width: 419px) {}
