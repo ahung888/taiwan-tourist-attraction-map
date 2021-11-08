@@ -1,10 +1,9 @@
 import React from 'react'
-import { useRouter } from 'next/router'
+import Image from './Image'
 import {GiBabyFace} from 'react-icons/gi'
 import styles from '../styles/Nav.module.css'
 
 const Nav = ({ show, onNavClose }) => {
-  const router = useRouter()
   return (
     <div>
       <div className={`nav-panel ${show ? 'active' : ''} ${styles.navInfo}`}>
@@ -17,7 +16,7 @@ const Nav = ({ show, onNavClose }) => {
         <main>
           <div>資料介接「交通部PTX平臺」</div>
           <a href="https://ptx.transportdata.tw/PTX/" target="_blank" rel="noopener noreferrer">
-            <img src={`${router.basePath}/images/PTX_logo.png`} alt="資料介接「交通部PTX平臺」" />
+            <Image src="/images/PTX_logo.png" alt="資料介接「交通部PTX平臺」" />
           </a>
         </main>
 
