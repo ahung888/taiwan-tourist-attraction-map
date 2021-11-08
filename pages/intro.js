@@ -1,10 +1,7 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
-import Head from 'next/head'
-import Link from 'next/link'
 import Image from '../components/Image'
 import styles from '../styles/IntroPage.module.css'
-import { gaScript } from '../utils/ga'
 
 const IntroPage = () => {
   const router = useRouter()
@@ -17,14 +14,6 @@ const IntroPage = () => {
 
   return (
     <div className={styles.w}>
-      <Head>
-        <title>台灣旅遊景點導覽地圖</title>
-        <meta name="description" content="台灣旅遊景點導覽地圖" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-        <script>{gaScript}</script>
-      </Head>
-
       <nav>
         <section>
           <div className={styles.nav}>
@@ -49,7 +38,7 @@ const IntroPage = () => {
         <section>
           <div className={`${styles.wrapper} ${styles.reverse}`}>
             <div className={styles.node}>
-              <h3>顯示搜尋結果列表，並在標記地圖上</h3>
+              <h3>顯示搜尋結果列表，並標記在地圖上</h3>
             </div>
             <div className={styles.node}>
               <Image src="/images/intro/search-result.png" alt="search result" />
@@ -100,7 +89,7 @@ const IntroPage = () => {
       </main>
 
       <footer>
-        作者：<a href="https://github.com/ahung888" target="_blank" rel="noopener noreferrer">ahung888</a>
+        作者：<a href="https://ahung888.github.io/" target="_blank" rel="noopener noreferrer">ahung888</a>
       </footer>
     </div>
   )

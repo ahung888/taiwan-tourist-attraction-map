@@ -122,6 +122,7 @@
   padding: .5rem;
   cursor: pointer;
   color: #208b5b;
+  background-color: #fff;
 }
 .w nav .btnCta:hover {
   background-color: rgba(66, 184, 131, .15);
@@ -138,6 +139,7 @@
   width: 17rem;
   padding: 2rem;
   text-align: center;
+  background-color: #fff;
 }
 .w main .btnCta:hover {
   background-color: rgba(66, 184, 131, .15);

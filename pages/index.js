@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux'
 import { setDevice, emptyEntities } from '../store'
-import Head from 'next/head'
 
 import Header from '../components/Header'
 import Footer from '../components/Footer'
@@ -9,7 +8,6 @@ import Nav from '../components/Nav'
 import ItemListSlidePane from '../components/ItemListSlidePane'
 import ItemSlidePane from '../components/ItemSlidePane'
 import Map from '../components/Map'
-import { gaScript } from '../utils/ga'
 
 export default function Home() {
   const dispatch = useDispatch()
@@ -50,14 +48,6 @@ export default function Home() {
 
   return (
     <div>
-      <Head>
-        <title>台灣旅遊景點導覽地圖</title>
-        <meta name="description" content="台灣旅遊景點導覽地圖" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-        <script>{gaScript}</script>
-      </Head>
-
       <Header
         onMenuClick={() => setShowNav(true)}
         onProfileClick={() => setShowItemPage(!showItemPage)}
