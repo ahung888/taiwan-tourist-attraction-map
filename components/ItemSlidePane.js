@@ -51,7 +51,7 @@ const ItemSlidePane = ({ show, data }) => {
 
         {data?.Phone
           ? <div className={cardStyles.iconRow}>
-              <BsTelephoneFill size="1.2rem" /><span>{data?.Phone}</span>
+              <BsTelephoneFill size="1.2rem" /><a href={`tel:${data?.Phone}`} rel="noreferrer">{data?.Phone}</a>
             </div>
           : ''
         }
