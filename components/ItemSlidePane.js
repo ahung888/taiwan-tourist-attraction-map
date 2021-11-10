@@ -1,4 +1,6 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux'
+import { selectGlobal } from '../store'
 import { getTags } from '../utils/dataHelper'
 
 import { AiOutlineFieldTime, AiOutlineGlobal } from 'react-icons/ai'
@@ -8,10 +10,13 @@ import { FaParking } from 'react-icons/fa'
 import styles from '../styles/SlidePane.module.css'
 import cardStyles from '../styles/Card.module.css'
 
-const ItemSlidePane = ({ show, data }) => {
+const ItemSlidePane = () => {
+  const showItemPage = useSelector(selectGlobal('showItemPage'))
+  const currentEntity = useSelector(selectGlobal('currentEntity'))
+  const data = currentEntity
 
   let renderedContent = ''
-  if (data !== undefined) {
+  if (data !== null) {
     const renderedTags = getTags(data).map((tag,i) => (
       <div key={i} className={cardStyles.tag}>{tag}</div>
     ))
@@ -75,7 +80,7 @@ const ItemSlidePane = ({ show, data }) => {
   }
 
   let classname = `${styles.slidePane} ${styles.posLeft} ${styles.layer2}`
-  classname += show ? ` ${styles.posLeftActive}` : ''
+  classname += showItemPage ? ` ${styles.posLeftActive}` : ''
 
   return (
     <div className={classname}>

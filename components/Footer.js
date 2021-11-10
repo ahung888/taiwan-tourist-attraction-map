@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
-import { selectGlobal } from '../store'
+import { useSelector, useDispatch } from 'react-redux'
+import { selectGlobal, setShowItemListPage, setShowItemPage } from '../store'
 
 import FooterPane from './FooterPane'
 import { FooterButton } from './Button'
@@ -9,29 +9,32 @@ import { MdKeyboardArrowUp } from 'react-icons/md'
 import { AiOutlineBars } from 'react-icons/ai'
 import { GrMap } from 'react-icons/gr'
 
-const Footer = ({ onFooterPaneClosed, showItemList, showMap }) => {
+const Footer = () => {
+  const dispatch = useDispatch()
   const entities = useSelector(selectGlobal('entities'))
+  const showItemListPage = useSelector(selectGlobal('showItemListPage'))
   const [showPane, setShowPane] = useState(false)
-  const [showListButton, setShowListButton] = useState(true)
   
   const data = Object.values(entities)
 
+  const hideItemPages = () => {
+    dispatch(setShowItemListPage(false))
+    dispatch(setShowItemPage(false))
+  }
   const handleListButtonClick = () => {
-    setShowListButton(false)
-    showItemList(showListButton)
+    dispatch(setShowItemListPage(true))
   }
   const handleMapButtonClick = () => {
-    setShowListButton(true)
-    showMap()
+    hideItemPages()
   }
   const handleFooterPaneClosed = () => {
     setShowPane(false)
-    onFooterPaneClosed()
+    hideItemPages()
   }
 
   const listButton = <FooterButton onClick={handleListButtonClick}><AiOutlineBars/>查看清單</FooterButton>
   const mapButton = <FooterButton onClick={handleMapButtonClick}><GrMap/>查看地圖</FooterButton>
-  const renderedButton = showListButton ? listButton : mapButton
+  const renderedButton = showItemListPage ? mapButton : listButton
 
   return (
     <>

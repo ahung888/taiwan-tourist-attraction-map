@@ -53,6 +53,7 @@ export const globalSlice = createSlice({
     },
     emptyEntities(state, aciton) {
       state.entities = {}
+      state.currentEntity = null
     },
     setPopupInfo(state, action) {
       state.popupInfo = action.payload

@@ -2,11 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import {
   selectGlobal,
-  setDevice,
-  setCurrentEntity,
-  emptyEntities,
-  setShowItemPage,
-  setShowItemListPage
+  setDevice
 } from '../store'
 
 import Header from '../components/Header'
@@ -19,9 +15,6 @@ import Map from '../components/Map'
 export default function Home() {
   const dispatch = useDispatch()
   const [showNav, setShowNav] = useState(false)
-  const currentEntity = useSelector(selectGlobal('currentEntity'))
-  const showItemPage = useSelector(selectGlobal('showItemPage'))
-  const showItemListPage = useSelector(selectGlobal('showItemListPage'))
 
   useEffect(() => {
     if (typeof window !== undefined) {
@@ -34,42 +27,17 @@ export default function Home() {
     }
   }, [])
 
-  const handleFooterPaneClosed = () => {
-    dispatch(setShowItemListPage(false))
-    dispatch(setShowItemPage(false))
-  }
-  const handleOnSelectItem = (item) => {
-    dispatch(setCurrentEntity(item))
-    dispatch(setShowItemPage(true))
-  }
-  const handleShowMap = () => {
-    dispatch(setShowItemListPage(false))
-    dispatch(setShowItemPage(false))
-  }
-  const handleSearchResultRemove = () => {
-    dispatch(setShowItemListPage(false))
-    dispatch(setShowItemPage(false))
-    dispatch(emptyEntities())
-  }
-
   return (
     <div>
       <Header
         onMenuClick={() => setShowNav(true)}
         onProfileClick={() => {}}
-        showReturnButton={showItemPage}
-        onReturnButtonClick={() => dispatch(setShowItemPage(false))}
-        onCrossButtonClick={handleSearchResultRemove}
       />
       <Nav show={showNav} onNavClose={() => setShowNav(false)} />
-      <ItemListSlidePane show={showItemListPage} onSelectItem={handleOnSelectItem} />
-      <ItemSlidePane show={showItemPage} data={currentEntity} />
+      <ItemListSlidePane />
+      <ItemSlidePane />
       <Map />
-      <Footer
-        onFooterPaneClosed={handleFooterPaneClosed}
-        showItemList={(open) => dispatch(setShowItemListPage(open))}
-        showMap={handleShowMap}
-      />
+      <Footer />
     </div>
   )
 }

@@ -3,8 +3,11 @@ import { useSelector, useDispatch } from 'react-redux'
 import {
   selectGlobal,
   setSearchText,
+  emptyEntities,
   emptySearchText,
-  emptyPopupInfo
+  emptyPopupInfo,
+  setShowItemPage,
+  setShowItemListPage
 } from '../store'
 import { fetchScenicSpotByKeyword } from '../store/api'
 
@@ -13,9 +16,10 @@ import {FaChild} from 'react-icons/fa'
 import {ImCross} from 'react-icons/im'
 import {BiArrowBack} from 'react-icons/bi'
 
-const Header = ({ onMenuClick, onProfileClick, showReturnButton, onReturnButtonClick, onCrossButtonClick }) => {
+const Header = ({ onMenuClick, onProfileClick }) => {
   const dispatch = useDispatch()
   const searchText = useSelector(selectGlobal('searchText'))
+  const showItemPage = useSelector(selectGlobal('showItemPage'))
   const { isMobile, isTablet, isDesktop } = useSelector(selectGlobal('device'))
 
   const onChange = (e) => {
@@ -26,10 +30,15 @@ const Header = ({ onMenuClick, onProfileClick, showReturnButton, onReturnButtonC
       dispatch(fetchScenicSpotByKeyword(searchText))
     }
   }
+  const handleArrowBackButtonClick = () => {
+    dispatch(setShowItemPage(false))
+  }
   const handleCrossButtonClick = () => {
     dispatch(emptySearchText())
     dispatch(emptyPopupInfo())
-    onCrossButtonClick()
+    dispatch(emptyEntities())
+    dispatch(setShowItemPage(false))
+    dispatch(setShowItemListPage(false))
   }
   const handleProfileClick = () => {
     // onProfileClick()
@@ -39,8 +48,8 @@ const Header = ({ onMenuClick, onProfileClick, showReturnButton, onReturnButtonC
     <header className="header">
       <div className="header-container">
 
-        {showReturnButton
-          ? <BiArrowBack className="menu-icon" onClick={onReturnButtonClick} />
+        {showItemPage
+          ? <BiArrowBack className="menu-icon" onClick={handleArrowBackButtonClick} />
           : <FiMenu className="menu-icon" onClick={onMenuClick} />
         }
 
