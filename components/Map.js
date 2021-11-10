@@ -101,7 +101,7 @@ const Map = ({  }) => {
   }
 
   if (status === 'loaded' && data.length > 0) {
-    setTimeout(() => flyToEntitiesCenter(), 500)
+    setTimeout(() => flyToEntitiesCenter(), 10)
     dispatch(setStatusRendered())
   }
 

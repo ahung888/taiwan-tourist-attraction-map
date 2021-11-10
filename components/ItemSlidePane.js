@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import {
   selectGlobal,
-  setPrevEntity,
-  setNextEntity
+  moveToPreviousEntity,
+  moveToNextEntity,
 } from '../store'
 import { getTags } from '../utils/dataHelper'
 import { showEntity } from '../components/Map'
+import { ApiContext } from '../store/api'
 
 import { AiOutlineFieldTime, AiOutlineGlobal } from 'react-icons/ai'
 import { BsTelephoneFill, BsTags } from 'react-icons/bs'
@@ -20,8 +21,11 @@ import cardStyles from '../styles/Card.module.css'
 
 const ItemSlidePane = () => {
   const dispatch = useDispatch()
+  const api = useContext(ApiContext)
   const showItemPage = useSelector(selectGlobal('showItemPage'))
   const currentEntity = useSelector(selectGlobal('currentEntity'))
+  const previousEntity = useSelector(selectGlobal('previousEntity'))
+  const nextEntity = useSelector(selectGlobal('nextEntity'))
   const data = currentEntity
 
   let renderedContent = ''
@@ -92,11 +96,11 @@ const ItemSlidePane = () => {
     document.getElementById('item-page-content').scrollTop = 0
   }
   const handlePrevClick = () => {
-    dispatch(setPrevEntity())
+    dispatch(moveToPreviousEntity())
     setTimeout(() => scrollContentToTop(),10)
   }
   const handleNextClick = () => {
-    dispatch(setNextEntity())
+    dispatch(moveToNextEntity())
     setTimeout(() => scrollContentToTop(),10)
   }
   const handleMapNavigationClick = () => {
@@ -112,9 +116,17 @@ const ItemSlidePane = () => {
         {renderedContent}
       </div>
       <div className={styles.nav}>
-        <div className={styles.navBtn} onClick={handlePrevClick}><FcPrevious /></div>
+        {previousEntity
+          ? <div className={styles.navBtn} onClick={handlePrevClick}><FcPrevious /></div>
+          : <div className={styles.navBtnEmpty} />
+        }
+        
         <div className={styles.navBtnLight} onClick={handleMapNavigationClick}><FiMapPin size="1.5rem" /></div>
-        <div className={styles.navBtn} onClick={handleNextClick}><FcNext /></div>
+        
+        {nextEntity
+          ? <div className={styles.navBtn} onClick={handleNextClick}><FcNext /></div>
+          : <div className={styles.navBtnEmpty} />
+        }
       </div>
     </div>
   )

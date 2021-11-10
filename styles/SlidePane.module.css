@@ -60,3 +60,8 @@
   text-align: center;
   cursor: pointer;
 }
+.navBtnEmpty {
+  width: 6.5rem;
+  padding: 0.4rem;
+  margin-top: 0.4rem;
+}

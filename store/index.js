@@ -18,6 +18,8 @@ export const globalSlice = createSlice({
     ids: [],
     entities: {},
     currentEntity: null,
+    previousEntity: null,
+    nextEntity: null,
 
     popupInfo: null,
     searchText: '',
@@ -52,8 +54,18 @@ export const globalSlice = createSlice({
     
     setCurrentEntity(state, action) {
       state.currentEntity = action.payload
+
+      const currId = action.payload.ID
+      const currIdx = state.ids.indexOf(currId)
+      
+      if (currIdx === -1) return
+      const [ prevId ] = state.ids.slice(currIdx-1, currIdx)
+      const [ nextId ] = state.ids.slice(currIdx+1, currIdx+2)
+
+      state.previousEntity = state.entities?.[prevId]
+      state.nextEntity = state.entities?.[nextId]
     },
-    setPrevEntity(state, action) {
+    moveToPreviousEntity(state, action) {
       const currId = state.currentEntity.ID
       const currIdx = state.ids.indexOf(currId)
       
@@ -61,10 +73,13 @@ export const globalSlice = createSlice({
       const [ prevId ] = state.ids.slice(currIdx-1, currIdx)
 
       if (prevId === undefined) return
+      const [ prev2Id ] = state.ids.slice(currIdx-2, currIdx-1)
 
+      state.previousEntity = state.entities?.[prev2Id]
       state.currentEntity = state.entities?.[prevId]
+      state.nextEntity = state.currentEntity
     },
-    setNextEntity(state, action) {
+    moveToNextEntity(state, action) {
       const currId = state.currentEntity.ID
       const currIdx = state.ids.indexOf(currId)
       
@@ -72,12 +87,17 @@ export const globalSlice = createSlice({
       const [ nextId ] = state.ids.slice(currIdx+1, currIdx+2)
 
       if (nextId === undefined) return
+      const [ next2Id ] = state.ids.slice(currIdx+2, currIdx+3)
 
+      state.previousEntity = state.currentEntity
       state.currentEntity = state.entities?.[nextId]
+      state.nextEntity = state.entities?.[next2Id]
     },
     emptyEntities(state, aciton) {
       state.entities = {}
       state.currentEntity = null
+      state.previousEntity = null
+      state.nextEntity = null
     },
 
     setPopupInfo(state, action) {
@@ -143,8 +163,8 @@ export const {
   emptyPopupInfo,
   setShowItemPage,
   setShowItemListPage,
-  setPrevEntity,
-  setNextEntity
+  moveToPreviousEntity,
+  moveToNextEntity
 } = globalSlice.actions
 
 export const wrapper = createWrapper(makeStore);
