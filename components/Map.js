@@ -89,7 +89,15 @@ const Map = ({  }) => {
     onSelectEntity(entity)
     dispatch(setCurrentEntity(entity))
     dispatch(setPopupInfo(entity))
-    dispatch(setShowItemPage(true))
+    if ( !isMobile ) {
+      dispatch(setShowItemPage(true))
+    }
+  }
+  const handlePopupWindowClicked = () => {
+    console.log('handlePopupWindowClicked')
+    if ( isMobile ) {
+      dispatch(setShowItemPage(true))
+    }
   }
   const handleEmptyPopupInfo = () => {
     dispatch(emptyPopupInfo())
@@ -129,6 +137,7 @@ const Map = ({  }) => {
             longitude={popupInfo?.Position?.PositionLon || 0}
             latitude={popupInfo?.Position?.PositionLat || 0}
             closeOnClick={false}
+            onClick={handlePopupWindowClicked}
             onClose={handleEmptyPopupInfo}
           >
             <SpotInfo info={popupInfo} />
