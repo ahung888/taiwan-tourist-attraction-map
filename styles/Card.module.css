@@ -44,6 +44,10 @@
 .iconRow svg {
   color: var(--primary-color);
 }
+.iconRow a {
+  inline-size: calc(100% - 0.8rem);
+  overflow-wrap: break-word;
+}
 
 .cardLoadMore {
   display: flex;

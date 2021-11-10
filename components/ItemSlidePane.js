@@ -1,16 +1,24 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { selectGlobal } from '../store'
+import {
+  selectGlobal,
+  setPrevEntity,
+  setNextEntity
+} from '../store'
 import { getTags } from '../utils/dataHelper'
 
 import { AiOutlineFieldTime, AiOutlineGlobal } from 'react-icons/ai'
 import { BsTelephoneFill, BsTags } from 'react-icons/bs'
 import { BiBus } from 'react-icons/bi'
 import { FaParking } from 'react-icons/fa'
+import { FcNext, FcPrevious } from 'react-icons/fc'
+import { FiMapPin } from 'react-icons/fi'
+
 import styles from '../styles/SlidePane.module.css'
 import cardStyles from '../styles/Card.module.css'
 
 const ItemSlidePane = () => {
+  const dispatch = useDispatch()
   const showItemPage = useSelector(selectGlobal('showItemPage'))
   const currentEntity = useSelector(selectGlobal('currentEntity'))
   const data = currentEntity
@@ -79,12 +87,32 @@ const ItemSlidePane = () => {
     )
   }
 
+  const scrollContentToTop = () => {
+    document.getElementById('item-page-content').scrollTop = 0
+  }
+  const handlePrevClick = () => {
+    dispatch(setPrevEntity())
+    setTimeout(() => scrollContentToTop(),10)
+  }
+  const handleNextClick = () => {
+    dispatch(setNextEntity())
+    setTimeout(() => scrollContentToTop(),10)
+  }
+  // const handleMapNavigationClick = () => {}
+
   let classname = `${styles.slidePane} ${styles.posLeft} ${styles.layer2}`
   classname += showItemPage ? ` ${styles.posLeftActive}` : ''
 
   return (
     <div className={classname}>
-      {renderedContent}
+      <div className={styles.content} id="item-page-content">
+        {renderedContent}
+      </div>
+      <div className={styles.nav}>
+        <div className={styles.navBtn} onClick={handlePrevClick}><FcPrevious /></div>
+        {/* <div className={styles.navBtnLight} onClick={handleMapNavigationClick}><FiMapPin size="1.5rem" /></div> */}
+        <div className={styles.navBtn} onClick={handleNextClick}><FcNext /></div>
+      </div>
     </div>
   )
 }

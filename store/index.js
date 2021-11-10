@@ -39,6 +39,7 @@ export const globalSlice = createSlice({
       state.device.isTablet = width >= 650 && width < 720
       state.device.isDesktop = width >= 720
     },
+
     setStatusRendered(state, action) {
       state.status = 'rendered'
     },
@@ -48,19 +49,44 @@ export const globalSlice = createSlice({
     emptySearchText(state, aciton) {
       state.searchText = ''
     },
+    
     setCurrentEntity(state, action) {
       state.currentEntity = action.payload
+    },
+    setPrevEntity(state, action) {
+      const currId = state.currentEntity.ID
+      const currIdx = state.ids.indexOf(currId)
+      
+      if (currIdx === -1 || currIdx === 0) return
+      const [ prevId ] = state.ids.slice(currIdx-1, currIdx)
+
+      if (prevId === undefined) return
+
+      state.currentEntity = state.entities?.[prevId]
+    },
+    setNextEntity(state, action) {
+      const currId = state.currentEntity.ID
+      const currIdx = state.ids.indexOf(currId)
+      
+      if (currIdx === -1) return
+      const [ nextId ] = state.ids.slice(currIdx+1, currIdx+2)
+
+      if (nextId === undefined) return
+
+      state.currentEntity = state.entities?.[nextId]
     },
     emptyEntities(state, aciton) {
       state.entities = {}
       state.currentEntity = null
     },
+
     setPopupInfo(state, action) {
       state.popupInfo = action.payload
     },
     emptyPopupInfo(state, action) {
       state.popupInfo = null
     },
+
     setShowItemPage(state, action) {
       state.showItemPage = action.payload
     },
@@ -116,7 +142,9 @@ export const {
   setPopupInfo,
   emptyPopupInfo,
   setShowItemPage,
-  setShowItemListPage
+  setShowItemListPage,
+  setPrevEntity,
+  setNextEntity
 } = globalSlice.actions
 
 export const wrapper = createWrapper(makeStore);
