@@ -12,7 +12,7 @@ import { ApiContext } from '../store/api'
 
 // const offsetForLoadingBuffer = 500
 
-const ItemListSlidePane = ({ show, onSelectItem }) => {
+const ItemListSlidePane = () => {
   const dispatch = useDispatch()
   const api = useContext(ApiContext)
   const entities = useSelector(selectGlobal('entities'))

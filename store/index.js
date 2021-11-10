@@ -24,6 +24,7 @@ export const globalSlice = createSlice({
 
     popupInfo: null,
     searchText: '',
+    splashMessage: null,
 
     // api
     status: 'idle',
@@ -32,6 +33,7 @@ export const globalSlice = createSlice({
     // ui
     showItemPage: false,
     showItemListPage: false,
+    showSearchPage: false,
   },
   reducers: {
     setDevice(state, action) {
@@ -51,6 +53,9 @@ export const globalSlice = createSlice({
     },
     emptySearchText(state, aciton) {
       state.searchText = ''
+    },
+    emptySplashMessage(state, aciton) {
+      state.splashMessage = null
     },
     
     setCurrentEntity(state, action) {
@@ -114,6 +119,9 @@ export const globalSlice = createSlice({
     setShowItemListPage(state, action) {
       state.showItemListPage = action.payload
     },
+    setShowSearchPage(state, action) {
+      state.showSearchPage = action.payload
+    },
   },
   extraReducers(builder) {
     builder
@@ -130,6 +138,10 @@ export const globalSlice = createSlice({
       .addCase(fetchScenicSpot.rejected, (state, action) => {
         state.status = 'failed'
         state.error = action.error.message
+
+        if (action.payload === 'search not found') {
+          state.splashMessage = '查無資料'
+        }
       })
       .addCase(fetchAdditionalScenicSpot.pending, (state, action) => {
         state.status = 'loading'
@@ -163,12 +175,14 @@ export const {
   setStatusRendered,
   setSearchText,
   emptySearchText,
+  emptySplashMessage,
   setCurrentEntity,
   emptyEntities,
   setPopupInfo,
   emptyPopupInfo,
   setShowItemPage,
   setShowItemListPage,
+  setShowSearchPage,
   moveToPreviousEntity,
   moveToNextEntity
 } = globalSlice.actions

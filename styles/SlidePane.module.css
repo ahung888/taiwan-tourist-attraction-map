@@ -9,13 +9,20 @@
   overflow-y: auto;
 }
 .posTop { top: -100vh; left: 0; }
-.posTopActive { top: -100vh; }
+.posTopActive { top: 4rem; }
 
 .posLeft { left: -100vw; top: 4rem; }
 .posLeftActive { left: 0; }
 
 .posBottom { bottom: -100vh; left: 0; }
 .posBottomActive { bottom: 3rem; }
+
+.slidePaneSearch {
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 @media (min-width: 650px) {
   .slidePane {

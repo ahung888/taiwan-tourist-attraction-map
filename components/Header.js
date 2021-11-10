@@ -7,7 +7,8 @@ import {
   emptySearchText,
   emptyPopupInfo,
   setShowItemPage,
-  setShowItemListPage
+  setShowItemListPage,
+  setShowSearchPage
 } from '../store'
 import { ApiContext, API_TYPES } from '../store/api'
 
@@ -32,6 +33,7 @@ const Header = ({ onMenuClick, onProfileClick }) => {
       dispatch(api.get()())
     }
   }
+
   const handleArrowBackButtonClick = () => {
     dispatch(setShowItemPage(false))
   }
@@ -41,11 +43,12 @@ const Header = ({ onMenuClick, onProfileClick }) => {
     dispatch(emptyEntities())
     dispatch(setShowItemPage(false))
     dispatch(setShowItemListPage(false))
+    dispatch(setShowSearchPage(false))
   }
   const handleProfileClick = () => {
     // onProfileClick()
   }
-
+  
   return (
     <header className="header">
       <div className="header-container">

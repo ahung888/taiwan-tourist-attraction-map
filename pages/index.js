@@ -7,6 +7,7 @@ import Footer from '../components/Footer'
 import Nav from '../components/Nav'
 import ItemListSlidePane from '../components/ItemListSlidePane'
 import ItemSlidePane from '../components/ItemSlidePane'
+import SearchPane from '../components/SearchPane'
 import Map from '../components/Map'
 
 export default function Home() {
@@ -33,6 +34,7 @@ export default function Home() {
       <Nav show={showNav} onNavClose={() => setShowNav(false)} />
       <ItemListSlidePane />
       <ItemSlidePane />
+      <SearchPane />
       <Map />
       <Footer />
     </div>

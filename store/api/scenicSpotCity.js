@@ -34,6 +34,10 @@ export const apiSpotCity = () => {
         reject(data, data.message)
         return rejectWithValue(data.message)
       }
+      if (data?.length === 0) {
+        reject(data)
+        return rejectWithValue('search not found')
+      }
     
       reject(data)
       return rejectWithValue('something went wrong')
