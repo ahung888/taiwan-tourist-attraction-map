@@ -12,10 +12,8 @@ const Card = ({ data, onCardClick }) => {
     <div key={i} className={styles.tag}>{tag}</div>
   ))
 
-  const {
-    PictureUrl1: src1,
-    PictureDescription1: alt1,
-  } = data?.Picture
+  const src1 = data?.Picture?.PictureUrl1 || ''
+  const alt1 = data?.Picture?.PiPictureDescription1ctureUrl1 || ''
 
   const handleClick = () => {
     onCardClick(data)

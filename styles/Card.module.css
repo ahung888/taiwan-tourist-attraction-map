@@ -44,3 +44,12 @@
 .iconRow svg {
   color: #42b883;
 }
+
+.cardLoadMore {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0;
+  color: var(--primary-color);
+  cursor: pointer;
+}

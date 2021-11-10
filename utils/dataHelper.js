@@ -7,3 +7,12 @@ export function getTags(data) {
   if (Level && Level !== '非古蹟') tags.push(`${Level}古蹟`)
   return tags
 }
+
+export function parseEntitiesToIdArrayAndEntitiesDictionary(entitiesArr = []) {
+  let entities = {}, ids = []
+  entitiesArr.map(entity => {
+    entities[entity.ID] = entity
+    ids.push(entity.ID)
+  })
+  return { entities, ids }
+}

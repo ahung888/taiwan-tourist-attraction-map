@@ -1,7 +1,8 @@
 import {configureStore, createSlice} from '@reduxjs/toolkit';
 import {createWrapper} from 'next-redux-wrapper';
 
-import { fetchScenicSpot } from './api'
+import { parseEntitiesToIdArrayAndEntitiesDictionary } from '../utils/dataHelper'
+import { fetchScenicSpot, fetchAdditionalScenicSpot } from './api'
 
 export const globalSlice = createSlice({
   name: 'global',
@@ -55,15 +56,24 @@ export const globalSlice = createSlice({
       })
       .addCase(fetchScenicSpot.fulfilled, (state, action) => {
         state.status = 'loaded'
-        let entities = {}, ids = []
-        action.payload.map(entity => {
-          entities[entity.ID] = entity
-          ids.push(entity.ID)
-        })
+        const { entities, ids } = parseEntitiesToIdArrayAndEntitiesDictionary(action.payload)
         state.entities = entities
         state.ids = ids
       })
       .addCase(fetchScenicSpot.rejected, (state, action) => {
+        state.status = 'failed'
+        state.error = action.error.message
+      })
+      .addCase(fetchAdditionalScenicSpot.pending, (state, action) => {
+        state.status = 'loading'
+      })
+      .addCase(fetchAdditionalScenicSpot.fulfilled, (state, action) => {
+        state.status = 'additions_loaded'
+        const { entities, ids } = parseEntitiesToIdArrayAndEntitiesDictionary(action.payload)
+        state.entities = { ...state.entities, ...entities }
+        state.ids = state.ids.concat(ids)
+      })
+      .addCase(fetchAdditionalScenicSpot.rejected, (state, action) => {
         state.status = 'failed'
         state.error = action.error.message
       })

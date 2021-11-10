@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useDispatch } from 'react-redux'
 import { setSearchText } from '../store'
-import { fetchScenicSpot } from '../store/api'
+import { ApiContext } from '../store/api'
 
 import { AreaButton } from './Button'
 
@@ -64,6 +64,7 @@ const CloseButton = styled.div`
 
 const FooterPane = ({ active, onClose }) => {
   const dispatch = useDispatch()
+  const api = useContext(ApiContext)
   const [selectedArea, setSelectedArea] = useState(null)
   const [selectedLocation, setSelectedLocation] = useState(null)
   
@@ -86,9 +87,13 @@ const FooterPane = ({ active, onClose }) => {
     <AreaButton
       className={`location ${location === selectedLocation ? 'active' : ''}`}
       key={idx}
-      onClick={() => setSelectedLocation(location)}
+      onClick={() => handleLocationSelected(location)}
     >{LOCATIONS[location]}</AreaButton>
   ))
+
+  const handleLocationSelected = (location) => {
+    setSelectedLocation(location)
+  }
 
   const handleClose = () => {
     setSelectedArea(null)
@@ -105,7 +110,8 @@ const FooterPane = ({ active, onClose }) => {
 
   const handleSubmit = () => {
     if (selectedLocation !== null) {
-      dispatch(fetchScenicSpot(selectedLocation))
+      api.set(selectedLocation)
+      dispatch(api.get()())
       dispatch(setSearchText(LOCATIONS[selectedLocation]))
       handleClose()
     } else {

@@ -42,7 +42,8 @@ const Map = ({  }) => {
     }
   }, [])
 
-  const onSelectEntity = useCallback(({ Position: { PositionLon, PositionLat } }) => {
+  const onSelectEntity = useCallback(({ Position: { PositionLon = 0, PositionLat = 0 } }) => {
+    if (PositionLon === 0 || PositionLat === 0) return
     setViewport({
       latitude: PositionLat,
       longitude: PositionLon,
@@ -52,7 +53,8 @@ const Map = ({  }) => {
     });
   }, []);
 
-  const flyToEntity = ({ data: { Position: { PositionLon, PositionLat }}}) => {
+  const flyToEntity = ({ data: { Position: { PositionLon = 0, PositionLat = 0 }}}) => {
+    if (PositionLon === 0 || PositionLat === 0) return
     setViewport({
       latitude: PositionLat,
       longitude: PositionLon + offsetLongitude,
@@ -105,8 +107,8 @@ const Map = ({  }) => {
           <Popup
             tipSize={5}
             anchor="top"
-            longitude={popupInfo.Position.PositionLon}
-            latitude={popupInfo.Position.PositionLat}
+            longitude={popupInfo?.Position?.PositionLon || 0}
+            latitude={popupInfo?.Position?.PositionLat || 0}
             closeOnClick={false}
             onClose={handleEmptyPopupInfo}
           >

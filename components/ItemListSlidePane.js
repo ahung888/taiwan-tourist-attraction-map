@@ -1,12 +1,14 @@
-import React from 'react';
-import { useSelector } from 'react-redux'
+import React, { useEffect, useContext } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
 import { selectGlobal } from '../store'
-
 import Card from './Card'
-
+import CardLoadMore from './CardLoadMore'
 import styles from '../styles/SlidePane.module.css'
+import { ApiContext } from '../store/api'
 
 const ItemListSlidePane = ({ show, onSelectItem }) => {
+  const dispatch = useDispatch()
+  const api = useContext(ApiContext)
   const entities = useSelector(selectGlobal('entities'))
 
   const renderedItems = Object.values(entities).map((entity, i) => (
@@ -16,9 +18,17 @@ const ItemListSlidePane = ({ show, onSelectItem }) => {
   let classname = `${styles.slidePane} ${styles.posBottom} ${styles.layer1}`
   classname += show ? ` ${styles.posBottomActive}` : ''
 
+  const handleLoadMore = () => {
+    dispatch(api.get()())
+  }
+
   return (
-    <div className={classname}>
+    <div className={classname} id="scrollContainer">
       {renderedItems}
+      {api.hasMore()
+        ? <CardLoadMore onClick={handleLoadMore} />
+        : ''
+      }
     </div>
   )
 }

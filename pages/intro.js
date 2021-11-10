@@ -60,7 +60,7 @@ const IntroPage = () => {
         <section>
           <div className={`${styles.wrapper} ${styles.reverse}`}>
             <div className={styles.node}>
-              <h1>資料提供</h1>
+              <h1>資料來源</h1>
               <p>資料來源由交通部與各公共運輸機關協作整合的「公共運輸整合資訊流通服務平臺」提供，平臺涵蓋的資料包含公路、 軌道、航空及航運4大類公共運輸旅運相關動靜態資料</p>
             </div>
             <div className={styles.node}>

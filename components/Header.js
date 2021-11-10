@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import {
   selectGlobal,
@@ -31,6 +31,9 @@ const Header = ({ onMenuClick, onProfileClick, showReturnButton, onReturnButtonC
     dispatch(emptyPopupInfo())
     onCrossButtonClick()
   }
+  const handleProfileClick = () => {
+    // onProfileClick()
+  }
 
   return (
     <header className="header">
@@ -53,7 +56,7 @@ const Header = ({ onMenuClick, onProfileClick, showReturnButton, onReturnButtonC
         </div>
 
         {searchText ? <ImCross className="menu-icon" size="1.5rem" color="#999" onClick={handleCrossButtonClick} /> : ''}
-        {isDesktop || ((isMobile || isTablet) && !searchText) ? <div className="profile" onClick={onProfileClick}><FaChild/></div> : ''}
+        {isDesktop || ((isMobile || isTablet) && !searchText) ? <div className="profile" onClick={handleProfileClick}><FaChild/></div> : ''}
 
       </div>
     </header>
