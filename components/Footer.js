@@ -21,15 +21,20 @@ const Footer = () => {
     dispatch(setShowItemListPage(false))
     dispatch(setShowItemPage(false))
   }
-  const handleListButtonClick = () => {
+  const handleListButtonClick = (e) => {
+    e.stopPropagation()
     dispatch(setShowItemListPage(true))
   }
-  const handleMapButtonClick = () => {
+  const handleMapButtonClick = (e) => {
+    e.stopPropagation()
     hideItemPages()
   }
   const handleFooterPaneClosed = () => {
     setShowPane(false)
     hideItemPages()
+  }
+  const handleFooterClicked = (e) => {
+    setShowPane(true)
   }
 
   const listButton = <FooterButton onClick={handleListButtonClick}><AiOutlineBars/>查看清單</FooterButton>
@@ -38,12 +43,12 @@ const Footer = () => {
 
   return (
     <>
-      <footer className="footer">
+      <footer className="footer" onClick={handleFooterClicked}>
         <div className="flex">
-          <div className="icon" onClick={() => setShowPane(true)}>
+          <div className="icon">
             <MdKeyboardArrowUp size="1.5rem" />
           </div>
-          <p onClick={() => setShowPane(true)}>快速查詢</p>
+          <p>快速查詢</p>
         </div>
         <div className="flex">
           {data.length > 0 ? renderedButton : ''}
