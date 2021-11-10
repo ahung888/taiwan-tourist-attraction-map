@@ -10,11 +10,31 @@ import CardLoadMore from './CardLoadMore'
 import styles from '../styles/SlidePane.module.css'
 import { ApiContext } from '../store/api'
 
+// const offsetForLoadingBuffer = 500
+
 const ItemListSlidePane = ({ show, onSelectItem }) => {
   const dispatch = useDispatch()
   const api = useContext(ApiContext)
   const entities = useSelector(selectGlobal('entities'))
   const showItemListPage = useSelector(selectGlobal('showItemListPage'))
+
+  // const handleScrolToBottom = () => {
+  //   console.log('scroll to bottom')
+  // }
+  // const handleScroll = (e) => {
+  //   const { offsetHeight, scrollTop, scrollHeight } = e.target
+  //   if (scrollHeight - scrollTop - offsetForLoadingBuffer <= offsetHeight) {
+  //     handleScrolToBottom()
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   let node = document.getElementById('scrollContainer')
+  //   node.addEventListener('scroll', handleScroll)
+  //   return () => {
+  //     node.removeEventListener('scroll', handleScroll)
+  //   }
+  // }, [])
 
   const handleCardClicked = (entity) => {
     dispatch(setCurrentEntity(entity))

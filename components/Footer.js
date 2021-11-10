@@ -32,7 +32,6 @@ const Footer = () => {
   }
   const handleFooterPaneClosed = () => {
     setShowPane(false)
-    hideItemPages()
   }
   const handleFooterClicked = (e) => {
     setShowPane(true)
