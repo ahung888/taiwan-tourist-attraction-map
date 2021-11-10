@@ -94,10 +94,7 @@ const Map = ({  }) => {
     }
   }
   const handlePopupWindowClicked = () => {
-    console.log('handlePopupWindowClicked')
-    if ( isMobile ) {
-      dispatch(setShowItemPage(true))
-    }
+    dispatch(setShowItemPage(true))
   }
   const handleEmptyPopupInfo = () => {
     dispatch(emptyPopupInfo())

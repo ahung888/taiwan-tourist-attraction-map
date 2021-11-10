@@ -24,6 +24,7 @@ const Footer = () => {
   const handleListButtonClick = (e) => {
     e.stopPropagation()
     dispatch(setShowItemListPage(true))
+    dispatch(setShowItemPage(false))
   }
   const handleMapButtonClick = (e) => {
     e.stopPropagation()
