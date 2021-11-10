@@ -42,7 +42,7 @@
   margin: 0.5rem;
 }
 .iconRow svg {
-  color: #42b883;
+  color: var(--primary-color);
 }
 
 .cardLoadMore {

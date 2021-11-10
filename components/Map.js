@@ -103,7 +103,7 @@ const Map = ({  }) => {
   const mapClassname = `map ${resize ? 'showItemPages' : ''}`
 
   return (
-    <div class={mapClassname}>
+    <div className={mapClassname}>
       <MapGL
         {...viewport}
         width="100%"

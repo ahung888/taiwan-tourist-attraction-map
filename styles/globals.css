@@ -17,4 +17,5 @@ a {
 
 :root {
   --primary-color: #42b883;
+  --primary-background-color: rgba(66, 184, 131, .15);
 }

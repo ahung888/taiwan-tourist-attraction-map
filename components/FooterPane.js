@@ -46,8 +46,8 @@ const SubmitButton = styled.button`
   width: 8rem;
   font-size: 1rem;
   padding: .5rem;
-  background-color: rgba(66, 184, 131, .15);
-  border: 1px solid #42b883;
+  background-color: var(--primary-background-color);
+  border: 1px solid var(--primary-color);
   color: #35495e;
   cursor: pointer;
 `
@@ -59,7 +59,7 @@ const CloseButton = styled.div`
   position: absolute;
   top: .5rem;
   right: .5rem;
-  color: #42b883;
+  color: var(--primary-color);
 `
 
 const FooterPane = ({ active, onClose }) => {

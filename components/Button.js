@@ -4,20 +4,20 @@ export const AreaButton = styled.button`
   font-size: 1.2rem;
   padding: .5rem;
   background-color: #fff;
-  border: 1px solid #42b883;
+  border: 1px solid var(--primary-color);
   border-radius: 5px;
   color: #35495e;
   cursor: pointer;
 
   &.active {
-    background-color: rgba(66, 184, 131, .15);
+    background-color: var(--primary-background-color);
   }
 `
 export const FooterButton = styled.button`
   font-size: 1rem;
   padding: .2rem .5rem;
-  background-color: rgba(66, 184, 131, .15);
-  border: 1px solid #42b883;
+  background-color: var(--primary-background-color);
+  border: 1px solid var(--primary-color);
   border-radius: 5px;
   color: #35495e;
   cursor: pointer;
@@ -26,6 +26,6 @@ export const FooterButton = styled.button`
   gap: .5rem;
 
   &.active {
-    background-color: rgba(66, 184, 131, .15);
+    background-color: var(--primary-background-color);
   }
 `

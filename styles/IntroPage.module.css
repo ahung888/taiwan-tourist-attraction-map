@@ -117,7 +117,7 @@
 /* components */
 
 .w nav .btnCta {
-  border: 1px solid #42b883;
+  border: 1px solid var(--primary-color);
   border-radius: .5rem;
   padding: .5rem;
   cursor: pointer;
@@ -125,12 +125,12 @@
   background-color: #fff;
 }
 .w nav .btnCta:hover {
-  background-color: rgba(66, 184, 131, .15);
+  background-color: var(--primary-background-color);
   color: #186e48;
 }
 
 .w main .btnCta {
-  border: 1px solid #42b883;
+  border: 1px solid var(--primary-color);
   border-radius: .5rem;
   padding: .5rem;
   cursor: pointer;
@@ -142,7 +142,7 @@
   background-color: #fff;
 }
 .w main .btnCta:hover {
-  background-color: rgba(66, 184, 131, .15);
+  background-color: var(--primary-background-color);
   color: #186e48;
 }
 
