@@ -50,7 +50,8 @@
   cursor: pointer;
 }
 .navBtn svg,
-.navBtnLight svg {
+.navBtnLight svg,
+.navBtnLoading svg {
   margin-top: 0.2rem;
 }
 .navBtnLight {
@@ -64,4 +65,13 @@
   width: 6.5rem;
   padding: 0.4rem;
   margin-top: 0.4rem;
+}
+.navBtnLoading {
+  border: 1px solid var(--primary-color);
+  width: 6.5rem;
+  border-radius: 5px;
+  padding: 0.4rem;
+  margin-top: 0.4rem;
+  text-align: center;
+  cursor: pointer;
 }

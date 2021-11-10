@@ -15,6 +15,7 @@ import { BiBus } from 'react-icons/bi'
 import { FaParking } from 'react-icons/fa'
 import { FcNext, FcPrevious } from 'react-icons/fc'
 import { FiMapPin } from 'react-icons/fi'
+import { MdDownloading } from 'react-icons/md'
 
 import styles from '../styles/SlidePane.module.css'
 import cardStyles from '../styles/Card.module.css'
@@ -26,6 +27,7 @@ const ItemSlidePane = () => {
   const currentEntity = useSelector(selectGlobal('currentEntity'))
   const previousEntity = useSelector(selectGlobal('previousEntity'))
   const nextEntity = useSelector(selectGlobal('nextEntity'))
+  const status = useSelector(selectGlobal('status'))
   const data = currentEntity
 
   let renderedContent = ''
@@ -129,7 +131,9 @@ const ItemSlidePane = () => {
         {nextEntity
           ? <div className={styles.navBtn} onClick={handleNextClick}><FcNext /></div>
           : api.hasMore()
-            ? <div className={styles.navBtn} onClick={handleLoadMoreClick}><AiOutlineCloudDownload /></div>
+            ? status === 'loading'
+              ? <div className={styles.navBtnLoading}><MdDownloading /></div>
+              : <div className={styles.navBtnLoading} onClick={handleLoadMoreClick}><AiOutlineCloudDownload /></div>
             : <div className={styles.navBtnEmpty} />
         }
       </div>
