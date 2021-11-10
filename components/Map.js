@@ -26,6 +26,8 @@ const Map = ({  }) => {
   const entities = useSelector(selectGlobal('entities'))
   const status = useSelector(selectGlobal('status'))
   const popupInfo = useSelector(selectGlobal('popupInfo'))
+  const showItemPage = useSelector(selectGlobal('showItemPage'))
+  const showItemListPage = useSelector(selectGlobal('showItemListPage'))
   const [viewport, setViewport] = useState({
     latitude: HOME_POS.TAIWAN[0],
     longitude: HOME_POS.TAIWAN[1],
@@ -87,21 +89,28 @@ const Map = ({  }) => {
     dispatch(emptyPopupInfo())
   }
 
+  const handleOnViewportChange = (viewport) => {
+    const {width, height, ...etc} = viewport
+    setViewport(etc)
+  }
+
   if (status === 'loaded' && data.length > 0) {
     setTimeout(() => flyToEntitiesCenter(), 500)
     dispatch(setStatusRendered())
   }
 
+  const resize = showItemPage || showItemListPage
+  const mapClassname = `map ${resize ? 'showItemPages' : ''}`
+
   return (
-    <div>
+    <div class={mapClassname}>
       <MapGL
-        className="map"
         {...viewport}
-        width="100vw"
-        height="100vh"
+        width="100%"
+        height="100%"
         // mapStyle="mapbox://styles/mapbox/light-v9"
         mapStyle="mapbox://styles/mapbox/streets-v11"
-        onViewportChange={setViewport}
+        onViewportChange={viewport => handleOnViewportChange(viewport)}
         mapboxApiAccessToken={MAPBOX_TOKEN}
         onClick={() => document.dispatchEvent(new Event("onmapclick"))}
       >

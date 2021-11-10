@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux'
-import {
-  selectGlobal,
-  setDevice
-} from '../store'
+import { useDispatch } from 'react-redux'
+import { setDevice } from '../store'
 
 import Header from '../components/Header'
 import Footer from '../components/Footer'
