@@ -4,6 +4,7 @@ import {
   selectGlobal,
   setStatusRendered,
   setPopupInfo,
+  setCurrentEntity,
   emptyPopupInfo
 } from '../store'
 import MapGL, {
@@ -77,6 +78,7 @@ const Map = ({  }) => {
 
   const handlePinClicked = (entity) => {
     onSelectEntity(entity)
+    dispatch(setCurrentEntity(entity))
     dispatch(setPopupInfo(entity))
   }
   const handleEmptyPopupInfo = () => {

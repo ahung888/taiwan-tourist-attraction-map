@@ -49,11 +49,9 @@ export const apiSpotCity = () => {
   const set = (city) => {
     _reset()
     _city = city
-    console.log('set _city: ', _city)
   }
 
   const _reset = () => {
-    console.log('_reset')
     _url = ''
     _city = ''
     _gotPage = 0
@@ -74,7 +72,6 @@ export const apiSpotCity = () => {
         _isLoading = false
       })
     }
-    console.log('empty: ', _city)
     return emptyAsyncAction
   }
 

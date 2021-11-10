@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux'
-import { setDevice, emptyEntities } from '../store'
+import { useSelector, useDispatch } from 'react-redux'
+import { selectGlobal, setDevice, setCurrentEntity, emptyEntities } from '../store'
 
 import Header from '../components/Header'
 import Footer from '../components/Footer'
@@ -14,7 +14,7 @@ export default function Home() {
   const [showNav, setShowNav] = useState(false)
   const [showItemList, setShowItemList] = useState(false)
   const [showItemPage, setShowItemPage] = useState(false)
-  const [selectedItem, setSelectedItem] = useState(null)
+  const currentEntity = useSelector(selectGlobal('currentEntity'))
 
   useEffect(() => {
     if (typeof window !== undefined) {
@@ -32,7 +32,7 @@ export default function Home() {
     setShowItemPage(false)
   }
   const handleOnSelectItem = (item) => {
-    setSelectedItem(item)
+    dispatch(setCurrentEntity(item))
     setShowItemPage(true)
   }
   const handleShowMap = () => {
@@ -42,7 +42,6 @@ export default function Home() {
   const handleSearchResultRemove = () => {
     setShowItemList(false)
     setShowItemPage(false)
-    setSelectedItem(null)
     dispatch(emptyEntities())
   }
 
@@ -57,7 +56,7 @@ export default function Home() {
       />
       <Nav show={showNav} onNavClose={() => setShowNav(false)} />
       <ItemListSlidePane show={showItemList} onSelectItem={handleOnSelectItem} />
-      <ItemSlidePane show={showItemPage} data={selectedItem} />
+      <ItemSlidePane show={showItemPage} data={currentEntity} />
       <Map />
       <Footer
         onFooterPaneClosed={handleFooterPaneClosed}

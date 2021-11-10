@@ -17,6 +17,7 @@ export const globalSlice = createSlice({
     searchText: '',
     ids: [],
     entities: {},
+    currentEntity: null,
     popupInfo: null,
     status: 'idle',
     error: '',
@@ -38,6 +39,9 @@ export const globalSlice = createSlice({
     },
     emptySearchText(state, aciton) {
       state.searchText = ''
+    },
+    setCurrentEntity(state, action) {
+      state.currentEntity = action.payload
     },
     emptyEntities(state, aciton) {
       state.entities = {}
@@ -92,6 +96,7 @@ export const {
   setStatusRendered,
   setSearchText,
   emptySearchText,
+  setCurrentEntity,
   emptyEntities,
   setPopupInfo,
   emptyPopupInfo
