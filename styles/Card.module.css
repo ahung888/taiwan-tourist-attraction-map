@@ -35,11 +35,17 @@
   max-height: 250px;
 }
 
-.iconRow {
+.shortCardIconRow {
   display: flex;
   align-items: center;
   gap: 1rem;
   margin: 0.5rem;
+}
+.iconRow {
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  align-items: center;
+  margin: 1.2rem 0;
 }
 .iconRow svg {
   color: var(--primary-color);

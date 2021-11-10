@@ -21,7 +21,7 @@ const Card = ({ data, onCardClick }) => {
     <div className={styles.card} onClick={handleClick}>
       <div>
         <div className={styles.title}>{data?.Name}</div>
-        <div className={styles.iconRow}>
+        <div className={styles.shortCardIconRow}>
           <BsTags size="1.2rem" /><span>{renderedTags}</span>
         </div>
       </div>
