@@ -6,6 +6,7 @@ import {
   setNextEntity
 } from '../store'
 import { getTags } from '../utils/dataHelper'
+import { showEntity } from '../components/Map'
 
 import { AiOutlineFieldTime, AiOutlineGlobal } from 'react-icons/ai'
 import { BsTelephoneFill, BsTags } from 'react-icons/bs'
@@ -98,7 +99,9 @@ const ItemSlidePane = () => {
     dispatch(setNextEntity())
     setTimeout(() => scrollContentToTop(),10)
   }
-  // const handleMapNavigationClick = () => {}
+  const handleMapNavigationClick = () => {
+    showEntity(data)
+  }
 
   let classname = `${styles.slidePane} ${styles.posLeft} ${styles.layer2}`
   classname += showItemPage ? ` ${styles.posLeftActive}` : ''
@@ -110,7 +113,7 @@ const ItemSlidePane = () => {
       </div>
       <div className={styles.nav}>
         <div className={styles.navBtn} onClick={handlePrevClick}><FcPrevious /></div>
-        {/* <div className={styles.navBtnLight} onClick={handleMapNavigationClick}><FiMapPin size="1.5rem" /></div> */}
+        <div className={styles.navBtnLight} onClick={handleMapNavigationClick}><FiMapPin size="1.5rem" /></div>
         <div className={styles.navBtn} onClick={handleNextClick}><FcNext /></div>
       </div>
     </div>

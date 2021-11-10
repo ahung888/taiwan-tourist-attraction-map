@@ -1,13 +1,10 @@
 import React from 'react';
-import { useDispatch } from 'react-redux'
-import { setPopupInfo } from '../store'
+import { showEntity } from './Map'
 import styles from '../styles/Card.module.css'
 import { getTags } from '../utils/dataHelper'
 import { BsTags } from 'react-icons/bs'
 
 const Card = ({ data, onCardClick }) => {
-  const dispatch = useDispatch()
-  
   const renderedTags = getTags(data).map((tag,i) => (
     <div key={i} className={styles.tag}>{tag}</div>
   ))
@@ -17,10 +14,7 @@ const Card = ({ data, onCardClick }) => {
 
   const handleClick = () => {
     onCardClick(data)
-    let event = new Event("flytospot")
-    event.data = data
-    document.dispatchEvent(event)
-    dispatch(setPopupInfo(data))
+    showEntity(data)
   }
 
   return (

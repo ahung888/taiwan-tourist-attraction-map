@@ -57,8 +57,12 @@ const Map = ({  }) => {
     });
   }, []);
 
-  const flyToEntity = ({ data: { Position: { PositionLon = 0, PositionLat = 0 }}}) => {
+  const flyToEntity = ({ entity }) => {
+    if (entity === undefined) return
+
+    const { Position: { PositionLon = 0, PositionLat = 0 } } = entity
     if (PositionLon === 0 || PositionLat === 0) return
+
     setViewport({
       latitude: PositionLat,
       longitude: PositionLon + offsetLongitude,
@@ -66,6 +70,8 @@ const Map = ({  }) => {
       transitionInterpolator: new FlyToInterpolator({speed: 1.2}),
       transitionDuration: 'auto'
     });
+
+    dispatch(setPopupInfo(entity))
   }
 
   const flyToEntitiesCenter = () => {
@@ -134,3 +140,9 @@ const Map = ({  }) => {
 }
 
 export default Map
+
+export const showEntity = (entity) => {
+  let event = new Event("flytospot")
+  event.entity = entity
+  document.dispatchEvent(event)
+}
