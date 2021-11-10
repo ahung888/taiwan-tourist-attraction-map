@@ -4,6 +4,8 @@ import {
   selectGlobal,
   moveToPreviousEntity,
   moveToNextEntity,
+  setShowItemPage,
+  setShowItemListPage
 } from '../store'
 import { getTags } from '../utils/dataHelper'
 import { showEntity } from '../components/Map'
@@ -28,6 +30,7 @@ const ItemSlidePane = () => {
   const previousEntity = useSelector(selectGlobal('previousEntity'))
   const nextEntity = useSelector(selectGlobal('nextEntity'))
   const status = useSelector(selectGlobal('status'))
+  const { isMobile } = useSelector(selectGlobal('device'))
   const data = currentEntity
 
   let renderedContent = ''
@@ -106,6 +109,10 @@ const ItemSlidePane = () => {
     setTimeout(() => scrollContentToTop(),10)
   }
   const handleMapNavigationClick = () => {
+    if ( isMobile ) {
+      dispatch(setShowItemListPage(false))
+      dispatch(setShowItemPage(false))
+    }
     showEntity(data)
   }
   const handleLoadMoreClick = () => {
