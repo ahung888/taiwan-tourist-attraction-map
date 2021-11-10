@@ -9,7 +9,7 @@ import { getTags } from '../utils/dataHelper'
 import { showEntity } from '../components/Map'
 import { ApiContext } from '../store/api'
 
-import { AiOutlineFieldTime, AiOutlineGlobal } from 'react-icons/ai'
+import { AiOutlineFieldTime, AiOutlineGlobal, AiOutlineCloudDownload } from 'react-icons/ai'
 import { BsTelephoneFill, BsTags } from 'react-icons/bs'
 import { BiBus } from 'react-icons/bi'
 import { FaParking } from 'react-icons/fa'
@@ -106,6 +106,9 @@ const ItemSlidePane = () => {
   const handleMapNavigationClick = () => {
     showEntity(data)
   }
+  const handleLoadMoreClick = () => {
+    dispatch(api.get()())
+  }
 
   let classname = `${styles.slidePane} ${styles.posLeft} ${styles.layer2}`
   classname += showItemPage ? ` ${styles.posLeftActive}` : ''
@@ -125,7 +128,9 @@ const ItemSlidePane = () => {
         
         {nextEntity
           ? <div className={styles.navBtn} onClick={handleNextClick}><FcNext /></div>
-          : <div className={styles.navBtnEmpty} />
+          : api.hasMore()
+            ? <div className={styles.navBtn} onClick={handleLoadMoreClick}><AiOutlineCloudDownload /></div>
+            : <div className={styles.navBtnEmpty} />
         }
       </div>
     </div>

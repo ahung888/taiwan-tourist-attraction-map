@@ -59,7 +59,7 @@ export const apiSpotCity = () => {
     _lastEntityCounts = EntityLimit
   }
 
-  const get = (dispatch) => {
+  const get = () => {
     if (_city && !_isLoading && hasMore()) {
       _isLoading = true
       const skip = _gotPage * _pageLimit

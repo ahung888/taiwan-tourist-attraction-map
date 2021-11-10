@@ -137,6 +137,10 @@ export const globalSlice = createSlice({
         const { entities, ids } = parseEntitiesToIdArrayAndEntitiesDictionary(action.payload)
         state.entities = { ...state.entities, ...entities }
         state.ids = state.ids.concat(ids)
+
+        if (state.currentEntity && ids.length > 0) {
+          state.nextEntity = entities[ids[0]]
+        }
       })
       .addCase(fetchAdditionalScenicSpot.rejected, (state, action) => {
         state.status = 'failed'
