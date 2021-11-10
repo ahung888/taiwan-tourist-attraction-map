@@ -124,6 +124,7 @@ export const globalSlice = createSlice({
         const { entities, ids } = parseEntitiesToIdArrayAndEntitiesDictionary(action.payload)
         state.entities = entities
         state.ids = ids
+        state.popupInfo = null
       })
       .addCase(fetchScenicSpot.rejected, (state, action) => {
         state.status = 'failed'
