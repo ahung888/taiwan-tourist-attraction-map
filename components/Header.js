@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import {
   selectGlobal,
@@ -9,7 +9,7 @@ import {
   setShowItemPage,
   setShowItemListPage
 } from '../store'
-import { fetchScenicSpotByKeyword } from '../store/api/scenicSpotKeyword'
+import { ApiContext, API_TYPES } from '../store/api'
 
 import {FiMenu} from 'react-icons/fi'
 import {FaChild} from 'react-icons/fa'
@@ -18,6 +18,7 @@ import {BiArrowBack} from 'react-icons/bi'
 
 const Header = ({ onMenuClick, onProfileClick }) => {
   const dispatch = useDispatch()
+  const api = useContext(ApiContext)
   const searchText = useSelector(selectGlobal('searchText'))
   const showItemPage = useSelector(selectGlobal('showItemPage'))
   const { isMobile, isTablet, isDesktop } = useSelector(selectGlobal('device'))
@@ -27,7 +28,8 @@ const Header = ({ onMenuClick, onProfileClick }) => {
   }
   const onKeyDown = (e) => {
     if (e.key === 'Enter') {
-      dispatch(fetchScenicSpotByKeyword(searchText))
+      api.set(API_TYPES.spotKeyword, { keyword: searchText })
+      dispatch(api.get()())
     }
   }
   const handleArrowBackButtonClick = () => {

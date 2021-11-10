@@ -31,11 +31,11 @@ export const apiSpotCity = () => {
         return data
       }
       if (typeof data === 'object' && data.message !== undefined) {
-        reject(data)
+        reject(data, data.message)
         return rejectWithValue(data.message)
       }
     
-      reject('something went wrong')
+      reject(data)
       return rejectWithValue('something went wrong')
     })
   }
@@ -60,11 +60,16 @@ export const apiSpotCity = () => {
       const querySkip = skip === 0 ? '' : `&$skip=${ skip }`
       const action = _gotPage === 0 ? actions.fetchScenicSpot : actions.fetchAdditionalScenicSpot
       const url = `https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/${_city}?$top=${EntityLimit}${querySkip}&$format=JSON`
-      return fetchFactory(url, action, (data) => {
-        _lastEntityCounts = data.length
-        _gotPage += 1
-        _isLoading = false
-      })
+      return fetchFactory(url, action,
+        (data) => {
+          _lastEntityCounts = data.length
+          _gotPage += 1
+          _isLoading = false
+        },
+        (response, error) => {
+          _lastEntityCounts = 0
+          _isLoading = false
+        })
     }
     return emptyAsyncAction
   }

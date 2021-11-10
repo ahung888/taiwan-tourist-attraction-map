@@ -35,16 +35,16 @@ export const apiSpotKeyword = () => {
         return data
       }
       if (typeof data === 'object' && data.message !== undefined) {
-        reject(data)
+        reject(data, data.message)
         return rejectWithValue(data.message)
       }
     
-      reject('something went wrong')
+      reject(data)
       return rejectWithValue('something went wrong')
     })
   }
   
-  const set = (keyword) => {
+  const set = ({ keyword }) => {
     _reset()
     _keyword = keyword
   }
@@ -63,12 +63,14 @@ export const apiSpotKeyword = () => {
       const skip = _gotPage * _pageLimit
       const querySkip = skip === 0 ? '' : `&$skip=${ skip }`
       const action = _gotPage === 0 ? actions.fetchScenicSpot : actions.fetchAdditionalScenicSpot
-      const filter = `contains(Keyword%2C%20'${keyword}')`
-      // const url = `https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/${_keyword}?$top=${EntityLimit}${querySkip}&$format=JSON`
+      const filter = `contains(Keyword%2C%20'${_keyword}')%20or%20contains(Name%2C%20'${_keyword}')`
       const url = `https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?$filter=${filter}&$top=${EntityLimit}${querySkip}&$format=JSON`
       return fetchFactory(url, action, (data) => {
         _lastEntityCounts = data.length
         _gotPage += 1
+        _isLoading = false
+      }, (response, error) => {
+        _lastEntityCounts = 0
         _isLoading = false
       })
     }
@@ -83,19 +85,3 @@ export const apiSpotKeyword = () => {
     hasMore
   }
 }
-
-export const fetchScenicSpotByKeyword = createAsyncThunk('global/fetchScenicSpot', async (keyword, { rejectWithValue }) => {
-  const url = `https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?$filter=contains(Keyword%2C%20'${keyword}')&$top=${EntityLimit}&$format=JSON`
-  const response = await fetch(url, { headers: GetAuthorizationHeader() })
-  const data = await response.json()
-
-  if (Array.isArray(data) && data.length > 0 && data[0].ID !== undefined) {
-    return data
-  }
-  if (typeof data === 'object' && data.message !== undefined) {
-    return rejectWithValue(data.message)
-  }
-
-  return rejectWithValue('something went wrong')
-})
-
