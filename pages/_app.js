@@ -1,12 +1,12 @@
 import React from 'react';
 import { wrapper } from '../store';
-import { apiSpotCity, ApiContext } from '../store/api'
+import { createApi, ApiContext } from '../store/api'
 import Layout from '../components/Layout'
 
 import '../styles/globals.css'
 import '../styles/home.css'
 
-const api = apiSpotCity()
+const api = createApi()
 
 function MyApp({ Component, pageProps }) {
   return (

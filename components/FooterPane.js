@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useDispatch } from 'react-redux'
 import { setSearchText } from '../store'
-import { ApiContext } from '../store/api'
+import { ApiContext, API_TYPES } from '../store/api'
 
 import { AreaButton } from './Button'
 
@@ -110,7 +110,7 @@ const FooterPane = ({ active, onClose }) => {
 
   const handleSubmit = () => {
     if (selectedLocation !== null) {
-      api.set(selectedLocation)
+      api.set(API_TYPES.spotCity, { city: selectedLocation })
       dispatch(api.get()())
       dispatch(setSearchText(LOCATIONS[selectedLocation]))
       handleClose()

@@ -3,6 +3,7 @@ import {createWrapper} from 'next-redux-wrapper';
 
 import { parseEntitiesToIdArrayAndEntitiesDictionary } from '../utils/dataHelper'
 import { fetchScenicSpot, fetchAdditionalScenicSpot } from './api'
+// import { fetchScenicSpot, fetchAdditionalScenicSpot } from './api/scenicSpotCity'
 
 export const globalSlice = createSlice({
   name: 'global',

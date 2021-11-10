@@ -1,6 +1,6 @@
 import { createContext } from 'react'
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { GetAuthorizationHeader } from '../utils/authorization'
+import { GetAuthorizationHeader } from '../../utils/authorization'
 
 const EntityLimit = 50
 const emptyFunc = () => {}
@@ -16,19 +16,17 @@ export const ApiContext = createContext()
 export const fetchScenicSpot = createAsyncThunk(actions.fetchScenicSpot, async () => {})
 export const fetchAdditionalScenicSpot = createAsyncThunk(actions.fetchAdditionalScenicSpot, async () => {})
 
-export const apiSpotCity = () => {
-
-  let self = this
+export const apiSpotKeyword = () => {
 
   let _url = ''
-  let _city = ''
+  let _keyword = ''
   let _gotPage = 0
   let _pageLimit = EntityLimit
   let _lastEntityCounts = EntityLimit
   let _isLoading = false
   
   const fetchFactory = (url, action = actions.fetchScenicSpot, resolve = emptyFunc, reject = emptyFunc) => {
-    return createAsyncThunk(action, async (city, { rejectWithValue }) => {
+    return createAsyncThunk(action, async (keyword, { rejectWithValue }) => {
       const response = await fetch(url, { headers: GetAuthorizationHeader() })
       const data = await response.json()
 
@@ -46,26 +44,28 @@ export const apiSpotCity = () => {
     })
   }
   
-  const set = (city) => {
+  const set = (keyword) => {
     _reset()
-    _city = city
+    _keyword = keyword
   }
 
   const _reset = () => {
     _url = ''
-    _city = ''
+    _keyword = ''
     _gotPage = 0
     _pageLimit = EntityLimit
     _lastEntityCounts = EntityLimit
   }
 
   const get = () => {
-    if (_city && !_isLoading && hasMore()) {
+    if (_keyword && !_isLoading && hasMore()) {
       _isLoading = true
       const skip = _gotPage * _pageLimit
       const querySkip = skip === 0 ? '' : `&$skip=${ skip }`
       const action = _gotPage === 0 ? actions.fetchScenicSpot : actions.fetchAdditionalScenicSpot
-      const url = `https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/${_city}?$top=${EntityLimit}${querySkip}&$format=JSON`
+      const filter = `contains(Keyword%2C%20'${keyword}')`
+      // const url = `https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/${_keyword}?$top=${EntityLimit}${querySkip}&$format=JSON`
+      const url = `https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?$filter=${filter}&$top=${EntityLimit}${querySkip}&$format=JSON`
       return fetchFactory(url, action, (data) => {
         _lastEntityCounts = data.length
         _gotPage += 1

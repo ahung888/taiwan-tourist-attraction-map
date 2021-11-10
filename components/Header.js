@@ -9,7 +9,7 @@ import {
   setShowItemPage,
   setShowItemListPage
 } from '../store'
-import { fetchScenicSpotByKeyword } from '../store/api'
+import { fetchScenicSpotByKeyword } from '../store/api/scenicSpotKeyword'
 
 import {FiMenu} from 'react-icons/fi'
 import {FaChild} from 'react-icons/fa'
