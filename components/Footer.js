@@ -48,7 +48,7 @@ const Footer = () => {
           <div className="icon">
             <MdKeyboardArrowUp size="1.5rem" />
           </div>
-          <p>快速查詢</p>
+          <p className="text-unselectable">快速查詢</p>
         </div>
         <div className="flex">
           {data.length > 0 ? renderedButton : ''}

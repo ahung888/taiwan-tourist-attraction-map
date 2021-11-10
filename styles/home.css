@@ -137,6 +137,9 @@ svg.menu-icon {
 .flex {
   display: flex;
 }
+.text-unselectable {
+  user-select: none;
+}
 
 .slide-pane {
   position: fixed;
