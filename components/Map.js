@@ -5,7 +5,8 @@ import {
   setStatusRendered,
   setPopupInfo,
   setCurrentEntity,
-  emptyPopupInfo
+  emptyPopupInfo,
+  setShowItemPage
 } from '../store'
 import MapGL, {
   Popup,
@@ -80,6 +81,7 @@ const Map = ({  }) => {
     onSelectEntity(entity)
     dispatch(setCurrentEntity(entity))
     dispatch(setPopupInfo(entity))
+    dispatch(setShowItemPage(true))
   }
   const handleEmptyPopupInfo = () => {
     dispatch(emptyPopupInfo())

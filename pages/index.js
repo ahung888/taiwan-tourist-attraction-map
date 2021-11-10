@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { selectGlobal, setDevice, setCurrentEntity, emptyEntities } from '../store'
+import {
+  selectGlobal,
+  setDevice,
+  setCurrentEntity,
+  emptyEntities,
+  setShowItemPage,
+  setShowItemListPage
+} from '../store'
 
 import Header from '../components/Header'
 import Footer from '../components/Footer'
@@ -12,9 +19,9 @@ import Map from '../components/Map'
 export default function Home() {
   const dispatch = useDispatch()
   const [showNav, setShowNav] = useState(false)
-  const [showItemList, setShowItemList] = useState(false)
-  const [showItemPage, setShowItemPage] = useState(false)
   const currentEntity = useSelector(selectGlobal('currentEntity'))
+  const showItemPage = useSelector(selectGlobal('showItemPage'))
+  const showItemListPage = useSelector(selectGlobal('showItemListPage'))
 
   useEffect(() => {
     if (typeof window !== undefined) {
@@ -28,20 +35,20 @@ export default function Home() {
   }, [])
 
   const handleFooterPaneClosed = () => {
-    setShowItemList(false)
-    setShowItemPage(false)
+    dispatch(setShowItemListPage(false))
+    dispatch(setShowItemPage(false))
   }
   const handleOnSelectItem = (item) => {
     dispatch(setCurrentEntity(item))
-    setShowItemPage(true)
+    dispatch(setShowItemPage(true))
   }
   const handleShowMap = () => {
-    setShowItemList(false)
-    setShowItemPage(false)
+    dispatch(setShowItemListPage(false))
+    dispatch(setShowItemPage(false))
   }
   const handleSearchResultRemove = () => {
-    setShowItemList(false)
-    setShowItemPage(false)
+    dispatch(setShowItemListPage(false))
+    dispatch(setShowItemPage(false))
     dispatch(emptyEntities())
   }
 
@@ -49,18 +56,18 @@ export default function Home() {
     <div>
       <Header
         onMenuClick={() => setShowNav(true)}
-        onProfileClick={() => setShowItemPage(!showItemPage)}
+        onProfileClick={() => {}}
         showReturnButton={showItemPage}
-        onReturnButtonClick={() => setShowItemPage(false)}
+        onReturnButtonClick={() => dispatch(setShowItemPage(false))}
         onCrossButtonClick={handleSearchResultRemove}
       />
       <Nav show={showNav} onNavClose={() => setShowNav(false)} />
-      <ItemListSlidePane show={showItemList} onSelectItem={handleOnSelectItem} />
+      <ItemListSlidePane show={showItemListPage} onSelectItem={handleOnSelectItem} />
       <ItemSlidePane show={showItemPage} data={currentEntity} />
       <Map />
       <Footer
         onFooterPaneClosed={handleFooterPaneClosed}
-        showItemList={(open) => setShowItemList(open)}
+        showItemList={(open) => dispatch(setShowItemListPage(open))}
         showMap={handleShowMap}
       />
     </div>

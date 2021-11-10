@@ -14,13 +14,21 @@ export const globalSlice = createSlice({
       isTablet: false,
       isDesktop: false,
     },
-    searchText: '',
+
     ids: [],
     entities: {},
     currentEntity: null,
+
     popupInfo: null,
+    searchText: '',
+
+    // api
     status: 'idle',
     error: '',
+
+    // ui
+    showItemPage: false,
+    showItemListPage: false,
   },
   reducers: {
     setDevice(state, action) {
@@ -51,6 +59,12 @@ export const globalSlice = createSlice({
     },
     emptyPopupInfo(state, action) {
       state.popupInfo = null
+    },
+    setShowItemPage(state, action) {
+      state.showItemPage = action.payload
+    },
+    setShowItemListPage(state, action) {
+      state.showItemListPage = action.payload
     },
   },
   extraReducers(builder) {
@@ -99,7 +113,9 @@ export const {
   setCurrentEntity,
   emptyEntities,
   setPopupInfo,
-  emptyPopupInfo
+  emptyPopupInfo,
+  setShowItemPage,
+  setShowItemListPage
 } = globalSlice.actions
 
 export const wrapper = createWrapper(makeStore);
