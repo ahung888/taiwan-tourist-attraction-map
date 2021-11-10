@@ -140,6 +140,9 @@ svg.menu-icon {
 .text-unselectable {
   user-select: none;
 }
+.mapboxgl-popup {
+  width: 220px;
+}
 
 .slide-pane {
   position: fixed;
