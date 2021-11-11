@@ -1,6 +1,5 @@
 import { createContext } from 'react'
 export {
-  apiSpotCity,
   fetchScenicSpot,
   fetchAdditionalScenicSpot
 } from './scenicSpotCity'
