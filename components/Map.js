@@ -51,11 +51,11 @@ const Map = ({  }) => {
     setViewport({
       latitude: PositionLat,
       longitude: PositionLon,
-      zoom: zoomLevel.spot,
+      zoom: Math.max(viewport.zoom, zoomLevel.spot),
       transitionInterpolator: new FlyToInterpolator({speed: 1.2}),
       transitionDuration: 'auto'
     });
-  }, []);
+  }, [viewport]);
 
   const flyToEntity = ({ entity }) => {
     if (entity === undefined) return
@@ -66,7 +66,7 @@ const Map = ({  }) => {
     setViewport({
       latitude: PositionLat,
       longitude: PositionLon + offsetLongitude,
-      zoom: zoomLevel.spot,
+      zoom: Math.max(viewport.zoom, zoomLevel.spot),
       transitionInterpolator: new FlyToInterpolator({speed: 1.2}),
       transitionDuration: 'auto'
     });
