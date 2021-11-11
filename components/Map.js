@@ -57,7 +57,7 @@ const Map = ({  }) => {
     });
   }, [viewport]);
 
-  const flyToEntity = ({ entity }) => {
+  const flyToEntity = (({ entity }) => {
     if (entity === undefined) return
 
     const { Position: { PositionLon = 0, PositionLat = 0 } } = entity
@@ -69,11 +69,11 @@ const Map = ({  }) => {
       zoom: Math.max(viewport.zoom, zoomLevel.spot),
       transitionInterpolator: new FlyToInterpolator({speed: 1.2}),
       transitionDuration: 'auto'
-    });
+    })
 
     dispatch(setPopupInfo(entity))
-  }
-
+  }).bind(viewport)
+  
   const flyToEntitiesCenter = () => {
     if (data.length > 0) {
       setViewport({
