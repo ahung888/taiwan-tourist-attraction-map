@@ -6,6 +6,7 @@ import {
   setPopupInfo,
   setCurrentEntity,
   emptyPopupInfo,
+  setShowItemListPage,
   setShowItemPage
 } from '../store'
 import MapGL, {
@@ -108,6 +109,10 @@ const Map = ({  }) => {
   if (status === 'loaded' && data.length > 0) {
     setTimeout(() => flyToEntitiesCenter(), 10)
     dispatch(setStatusRendered())
+
+    if (!isMobile) {
+      setTimeout(() => dispatch(setShowItemListPage(true)), 500)
+    }
   }
 
   const resize = showItemPage || showItemListPage
