@@ -6,7 +6,7 @@ function CityInfo(props) {
   const imgSrc = info?.Picture?.PictureUrl1
   const imgAlt = info?.Picture?.PictureDescription1
 
-  const displayName = `${info.Name}, ${info.City}`;
+  const displayName = `${info.ScenicSpotName}, ${info.City}`;
   const displayImage = imgSrc ? <img className={styles.img} src={imgSrc} alt={imgAlt} /> : ''
 
   return (

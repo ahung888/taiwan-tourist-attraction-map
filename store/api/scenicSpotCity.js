@@ -26,7 +26,8 @@ export const apiSpotCity = () => {
       const response = await fetch(url, { headers: GetAuthorizationHeader() })
       const data = await response.json()
 
-      if (Array.isArray(data) && data.length > 0 && data[0].ID !== undefined) {
+      if (Array.isArray(data) && data.length > 0 && data[0].ScenicSpotID !== undefined) {
+        data = data.map(d => { return { ...d, ID: d.ScenicSpotID } })
         resolve(data)
         return data
       }
