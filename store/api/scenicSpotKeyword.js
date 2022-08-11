@@ -68,7 +68,7 @@ export const apiSpotKeyword = () => {
       const skip = _gotPage * _pageLimit
       const querySkip = skip === 0 ? '' : `&$skip=${ skip }`
       const action = _gotPage === 0 ? actions.fetchScenicSpot : actions.fetchAdditionalScenicSpot
-      const filter = `contains(Keyword%2C%20'${_keyword}')%20or%20contains(Name%2C%20'${_keyword}')`
+      const filter = `contains(Keyword%2C%20'${_keyword}')%20or%20contains(ScenicSpotName%2C%20'${_keyword}')`
       const url = `https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?$filter=${filter}&$top=${EntityLimit}${querySkip}&$format=JSON`
       return fetchFactory(url, action, (data) => {
         _lastEntityCounts = data.length
