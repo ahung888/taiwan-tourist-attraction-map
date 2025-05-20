@@ -23,7 +23,7 @@ export const apiSpotCity = () => {
   
   const fetchFactory = (url, action = actions.fetchScenicSpot, resolve = emptyFunc, reject = emptyFunc) => {
     return createAsyncThunk(action, async (city, { rejectWithValue }) => {
-      const response = await fetch(url, { headers: GetAuthorizationHeader() })
+      const response = await fetch(url, { headers: await GetAuthorizationHeader() })
       const data = await response.json()
 
       if (Array.isArray(data) && data.length > 0 && data[0].ScenicSpotID !== undefined) {
@@ -64,7 +64,7 @@ export const apiSpotCity = () => {
       const skip = _gotPage * _pageLimit
       const querySkip = skip === 0 ? '' : `&$skip=${ skip }`
       const action = _gotPage === 0 ? actions.fetchScenicSpot : actions.fetchAdditionalScenicSpot
-      const url = `https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/${_city}?$top=${EntityLimit}${querySkip}&$format=JSON`
+      const url = `https://tdx.transportdata.tw/api/basic/v2/Tourism/ScenicSpot/${_city}?$top=${EntityLimit}${querySkip}&$format=JSON`
       return fetchFactory(url, action,
         (data) => {
           _lastEntityCounts = data.length
